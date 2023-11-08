@@ -5,66 +5,79 @@ import {nanoid} from "nanoid"
 function App() {
   
   const [digits, setDigits] = useState([])
+  const [userInput, setUserInput] = useState('')
+  const [answer, setAnswer] = useState(null)
+
+  useEffect(() => {
+    if (isNaN(userInput)){
+      setDigits([])
+    }
+  }, [userInput])
 
   function generateDigits(){
       const newDigit = []
-      let answer = 0
-      for (let i = 0; i < 10; i++) {
+
+      for (let i = 0; i < userInput; i++) {
           newDigit.push(Math.ceil(Math.random() * 9999))
       }
-      return setDigits(newDigit)
+      setDigits(newDigit)
+      const randomIndex = Math.floor(Math.random() * userInput);
+      setAnswer(newDigit[randomIndex])
   }
-
-  const answer = digits[Math.floor(Math.random() * 10)]
-
-  const [userAnswer, setUserAnswer] = useState(answer)
+  
 
   const digitsElements = digits.map(digit => 
     <Digit 
-      key = {nanoid()} 
+      key = {nanoid()}
       value = {digit} 
       answer = {answer}
     />)
-
-
-
+  
+  
 
 
   const [isCheaterDetected, setIsCheaterDetected] = useState(false);
-
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && (event.key === 'f' || event.key === 'а')) {
-        setIsCheaterDetected(true);
+        window.location.reload()
       }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
+    }
+    document.addEventListener('keydown', handleKeyDown)
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
 
   return (
     <div className="App">
-      {isCheaterDetected && (
-        <div className="warning-message">
-          <p>You are trying to use search. This is cheating!</p>
-        </div>
-      )}
+
       <div className="text-above">
         <h1>Find Number</h1>
-        <p>You are supposed to find this {answer} number in the list. Good luck!</p>
+        {answer && <p>You are supposed to find {answer} number in the list. Good luck!</p>}
       </div>
 
       <button className="roll-dice" onClick={generateDigits}>Reroll</button>
+      <input 
+        className="digitsCount" 
+        placeholder="How many digits you want?"
+        value={userInput}
+        onChange={(e) => {
+          const value = e.target.value;
+          if (!isNaN(value)) {
+            setUserInput(value)
+          } else {
+            setUserInput('')
+            alert("Use only numbers!") 
+          }
+        }}
+      />
 
       <div className="digits-container">
         {digitsElements}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
