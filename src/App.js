@@ -32,11 +32,7 @@ function App() {
       value = {digit} 
       answer = {answer}
     />)
-  
-  
 
-
-  const [isCheaterDetected, setIsCheaterDetected] = useState(false);
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && (event.key === 'f' || event.key === 'а')) {

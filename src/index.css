@@ -12,11 +12,11 @@ body {
 }
 .text-above h1{
   color: tomato;
-  background-color: aqua;
+  font-weight: 700;
 }
 .text-above p{
-  color: tomato;
-  background-color: yellow;
+  color: black;
+  font-weight: 500;
 }
 
 .digits-container{
@@ -44,7 +44,21 @@ body {
   color: black;
 }
 
+input, button {
+  margin: 5px;
+  margin-bottom: 25px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  user-select: none;
+}
 
-.warning-message{
-  background-color: red;
+input {
+  background-color: #fff; /* Цвет фона для input */
+}
+
+button {
+  background-color: tomato; /* Цвет фона для button */
+  color: #fff; /* Цвет текста на кнопке */
+  cursor: pointer;
 }
