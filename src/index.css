@@ -1,21 +1,34 @@
 body {
+  background-color: green;
   margin: 0;
-  padding-left: 100px;
+  font-family: Arial, Helvetica, sans-serif;
   padding-right: 100px;
+  padding-left: 100px;
+  z-index: 800;
 }
 
 header{
+  background-color: #fff;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
   padding: 20px;
+}
+
+header.sticky {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Например, добавление тени для эффекта */
+  background-color: #fff;
+  
 }
 
 img[alt="Alza-logo"] {
   width: 150px;
   height: 50px;
+  padding-right: 50px;
 }
 
 .button-input {
@@ -48,6 +61,7 @@ img[alt="Alza-logo"] {
   font-weight: 600;
   transition: box-shadow 0.3s ease-in-out;
   border-radius:0px 5px 5px 0px;
+  user-select: none;
 }
 
 .button-input button:hover {
@@ -55,6 +69,7 @@ img[alt="Alza-logo"] {
 }
 
 .user-menu{
+  font-size: 14px;
   color:#00275B;
   gap: 10px;
   border: none;
@@ -63,6 +78,12 @@ img[alt="Alza-logo"] {
   position: relative;
   align-items: center;
   cursor: pointer;
+  justify-content: end;
+  margin-left: 160px;
+}
+
+.button-down{
+  color: #606060;
 }
 
 .user-menu:hover{
@@ -78,19 +99,144 @@ img[alt="Alza-logo"] {
   text-decoration: underline;
 }
 
-.avatar {
+.avatar-person {
   height: 30px;
   width: 30px;
   border-radius: 50%;
+  border: 1px solid white;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #dfdfdf;
+  cursor: pointer;
 }
 
-.avatar > svg {
+.avatar-person > svg {
   height: 50%;
   width: 50%;
   color: #00275B;
+  
+}
+
+.user-options{
+  gap: 20px;
+  border: none;
+  display: flex;
+  padding: 5px;
+  position: relative;
+  align-items: center;
+}
+
+.user-options::before,
+.user-options::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 20px; 
+  background-color: #d9d9d9; 
+  margin: 0 1px;
+}
+
+.user-options > div > svg{
+  height: 25px;
+  width: 25px;
+  color: #00275B;
+  cursor: pointer;
+}
+
+.user-options > div > svg:hover {
+  color:#0065a0
+}
+
+/* Main container for the element to which the tooltip is applied */
+.tooltip {
+  position: relative; /* Relative positioning to ensure ::before and ::after elements are positioned relative to this container */
+  display: inline-block; /* Setting the element to inline-block for proper display */
+  padding-top: 8px; /* Adding top padding for better spacing */
+}
+
+/* Pseudo-elements ::before and ::after used to create the tooltip and triangle */
+.tooltip::before,
+.tooltip::after {
+  content: "";
+  position: absolute; /* Absolute positioning for precise element placement */
+  visibility: hidden; /* Hiding elements until activated */
+  opacity: 0; /* Initial opacity */
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; /* Smooth fade in and out */
+}
+
+/* Tooltip displayed on hover */
+.tooltip::before {
+  content: attr(data-tooltip); /* Tooltip text taken from the data-tooltip attribute */
+  position: absolute;
+  background-color: rgb(40, 40, 40); /* Tooltip background color */
+  color: #fff; /* Tooltip text color */
+  padding: 6px; /* Tooltip internal padding */
+  border-radius: 4px; /* Tooltip corner rounding */
+  font-size: 12px; /* Tooltip text size */
+  font-weight: 700; /* Tooltip text weight */
+  z-index: 1; /* Tooltip is above the triangle */
+  bottom: 90%; /* Tooltip appears above the parent element */
+  left: 50%; /* Centering the tooltip horizontally */
+  transform: translateX(-50%); /* Adjusting the tooltip position relative to the parent element */
+  white-space: nowrap; /* Preventing text from wrapping to a new line */
+}
+
+/* Triangle pointing to the tooltip */
+.tooltip::after {
+  content: "";
+  border-width: 5px; /* Triangle size */
+  border-style: solid;
+  border-color: rgb(40, 40, 40) transparent transparent transparent; /* Triangle color */
+  z-index: 2; /* Triangle is above the tooltip */
+  bottom: 64%; /* Triangle is positioned below the tooltip */
+  left: 50%; /* Centering the triangle horizontally */
+  transform: translateX(-50%); /* Adjusting the triangle position relative to the parent element */
+}
+
+/* Tooltip and triangle appear on hover */
+.tooltip:hover::before,
+.tooltip:hover::after {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.01s;/* Smooth fade in and out */
+}
+
+.avatar-lang {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid #a4a4a4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dfdfdf;
+  cursor: pointer;
+}
+
+
+
+.user-goods{
+  display: flex;
+  justify-content: center;
+}
+
+.user-goods > svg{
+  color:#a4a4a4;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
+
+.user-goods > svg:hover{
+  color:#606060;
+}
+
+.main-body{
+  background-color: #00275B;
+  height: 3000px;
+  padding-right: 100px;
+  padding-left: 100px;
 }
